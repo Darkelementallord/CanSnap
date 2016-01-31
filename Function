@@ -1,0 +1,17 @@
+--Will (hopefully) detect if the "Frame" is within the "SnapLimit" from the screen border and will return an X,Y co-ordinate.
+--If it is not within range to snap, it will return the previous co-ords (absolute)
+
+CanSnap = function(Frame)
+	local SnapLimit = 10 --Offset from edge
+	
+	local ViewX,ViewY = localplayer:GetMouse().ViewSizeX,localplayer:GetMouse().ViewSizeY
+	local SizeX,SizeY = Frame.AbsoluteSize.X,Frame.AbsoluteSize.Y
+	local PosX,PosY = Frame.AbsolutePosition.X,Frame.AbsolutePosition.Y
+	local SnapX,SnapY = PosX,PosY
+	if (PosX <= SnapLimit) then SnapX = 0 end
+	if (PosY <= SnapLimit) then SnapY = 0 end
+	if ((PosX +SizeX) >= (ViewX -SnapLimit)) then SnapX = (ViewX -SizeX) end
+	if ((PosY +SizeY) >= (ViewY -SnapLimit)) then SnapY = (ViewY -SizeY) end
+	
+	return SnapX,SnapY
+end
