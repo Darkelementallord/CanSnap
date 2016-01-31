@@ -1,2 +1,0 @@
-# CanSnap
-N/A
